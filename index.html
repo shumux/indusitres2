@@ -1,211 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZAH INDUSTRIES — Building the Future</title>
-  <meta name="description" content="ZAH INDUSTRIES is a multi-profile business group uniting companies in sales, digital technologies and media. We create, develop and scale modern business projects." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAH INDUSTRIES</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: #ffffff;
+            color: #000000;
+            text-align: center;
+            margin: 0;
+            padding: 50px 20px;
+        }
+        h1 {
+            font-size: 48px;
+            letter-spacing: 8px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .subtitle {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 80px;
+            border-bottom: 1px solid #000;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .card {
+            border: 1px solid #000;
+            padding: 40px 20px;
+            width: 250px;
+            text-decoration: none;
+            color: #000;
+            transition: 0.3s;
+        }
+        .card:hover {
+            background-color: #000;
+            color: #fff;
+        }
+        .card h2 {
+            font-size: 24px;
+            margin-top: 0;
+            letter-spacing: 2px;
+        }
+        .card p {
+            font-size: 14px;
+            color: #666;
+        }
+        .card:hover p {
+            color: #ccc;
+        }
+        .footer {
+            margin-top: 100px;
+            font-size: 12px;
+            color: #999;
+            letter-spacing: 2px;
+        }
+    </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <header class="header" id="header">
-    <div class="container header-inner">
-      <a href="#hero" class="logo-link" aria-label="ZAH INDUSTRIES Home">
-        <img src="logo.jpg" alt="ZAH INDUSTRIES" class="logo-img" />
-      </a>
-      <nav class="nav" id="nav">
-        <ul class="nav-list">
-          <li><a href="#hero" class="nav-link">Home</a></li>
-          <li><a href="#about" class="nav-link">About Us</a></li>
-          <li><a href="#companies" class="nav-link">Our Companies</a></li>
-          <li><a href="#vision" class="nav-link">Our Vision</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
-      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+
+    <h1>ZAH INDUSTRIES</h1>
+    <div class="subtitle">Группа компаний</div>
+
+    <div class="grid">
+        <a href="#" class="card">
+            <h2>ZahSales</h2>
+            <p>Торговля и продажи</p>
+        </a>
+        <a href="#" class="card">
+            <h2>ZahDigital</h2>
+            <p>Разработка ботов и сайтов</p>
+        </a>
+        <a href="#" class="card">
+            <h2>ZahMedia</h2>
+            <p>YouTube-канал</p>
+        </a>
     </div>
-  </header>
 
-  <!-- Mobile menu overlay -->
-  <div class="mobile-menu" id="mobile-menu">
-    <ul class="mobile-nav-list">
-      <li><a href="#hero" class="mobile-nav-link">Home</a></li>
-      <li><a href="#about" class="mobile-nav-link">About Us</a></li>
-      <li><a href="#companies" class="mobile-nav-link">Our Companies</a></li>
-      <li><a href="#vision" class="mobile-nav-link">Our Vision</a></li>
-      <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
-    </ul>
-  </div>
+    <div class="footer">
+        © 2026 Zah Industries
+    </div>
 
-  <main>
-    <!-- Hero -->
-    <section class="hero" id="hero">
-      <div class="container hero-content">
-        <div class="hero-logo reveal">
-          <img src="logo.jpg" alt="ZAH INDUSTRIES logo" class="hero-logo-img" />
-        </div>
-        <p class="hero-label reveal delay-1">ZAH INDUSTRIES</p>
-        <h1 class="hero-title reveal delay-2">
-          BUILDING THE FUTURE.<br />CREATING VALUE.
-        </h1>
-        <p class="hero-desc reveal delay-3">
-          ZAH INDUSTRIES — a multi-profile business group uniting companies in sales, digital technologies and media. We create, develop and scale modern business projects.
-        </p>
-        <a href="#companies" class="btn btn-primary reveal delay-4">EXPLORE OUR COMPANIES</a>
-      </div>
-      <div class="hero-scroll">
-        <span>Scroll</span>
-        <div class="scroll-line"></div>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section class="about section" id="about">
-      <div class="container">
-        <p class="section-label reveal">About</p>
-        <h2 class="section-title reveal">WHO WE ARE</h2>
-        <div class="about-grid">
-          <div class="about-text reveal">
-            <p>
-              ZAH INDUSTRIES is an ecosystem of independent business directions united by a common strategy, an innovative approach and a drive for growth.
-            </p>
-            <p>
-              Our goal is to create effective business solutions, develop promising directions and build long-term value.
-            </p>
-          </div>
-          <div class="about-stats reveal">
-            <div class="stat">
-              <span class="stat-number">3</span>
-              <span class="stat-label">Core Directions</span>
-            </div>
-            <div class="stat">
-              <span class="stat-number">1</span>
-              <span class="stat-label">Unified Vision</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Companies -->
-    <section class="companies section" id="companies">
-      <div class="container">
-        <p class="section-label reveal">Portfolio</p>
-        <h2 class="section-title reveal">OUR COMPANIES</h2>
-        <p class="section-subtitle reveal">Three directions. One vision.</p>
-
-        <div class="companies-grid">
-          <!-- ZAH SALES -->
-          <article class="company-card reveal" data-company="sales">
-            <div class="company-card-inner">
-              <div class="company-header">
-                <h3 class="company-name">ZAH SALES</h3>
-                <span class="company-tag">SALES &amp; BUSINESS DEVELOPMENT</span>
-              </div>
-              <p class="company-desc">
-                ZahSales specializes in sales, commercial projects, client relationship development and the creation of effective business models.
-              </p>
-              <div class="company-extra">
-                <p>
-                  We build scalable commercial systems, optimize go-to-market strategies and unlock growth opportunities across markets.
-                </p>
-                <a href="#" class="btn btn-outline company-btn" data-link="sales">EXPLORE</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- ZAH DIGITAL -->
-          <article class="company-card reveal" data-company="digital">
-            <div class="company-card-inner">
-              <div class="company-header">
-                <h3 class="company-name">ZAH DIGITAL</h3>
-                <span class="company-tag">TECHNOLOGY &amp; INNOVATION</span>
-              </div>
-              <p class="company-desc">
-                ZahDigital delivers digital solutions, develops modern products, automates processes and advances technology projects.
-              </p>
-              <div class="company-extra">
-                <p>
-                  From product engineering to process automation — we turn ideas into reliable, scalable digital systems.
-                </p>
-                <a href="#" class="btn btn-outline company-btn" data-link="digital">EXPLORE</a>
-              </div>
-            </div>
-          </article>
-
-          <!-- ZAH MEDIA -->
-          <article class="company-card reveal" data-company="media">
-            <div class="company-card-inner">
-              <div class="company-header">
-                <h3 class="company-name">ZAH MEDIA</h3>
-                <span class="company-tag">MEDIA &amp; COMMUNICATIONS</span>
-              </div>
-              <p class="company-desc">
-                ZahMedia unites content creation, media production, visual communications and the development of brands’ digital presence.
-              </p>
-              <div class="company-extra">
-                <p>
-                  We craft narratives, visual systems and media strategies that strengthen brand perception and audience connection.
-                </p>
-                <a href="#" class="btn btn-outline company-btn" data-link="media">EXPLORE</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Vision -->
-    <section class="vision section" id="vision">
-      <div class="container vision-content">
-        <h2 class="vision-title reveal">
-          ONE VISION.<br />MULTIPLE DIRECTIONS.
-        </h2>
-        <p class="vision-text reveal">
-          We believe in building strong businesses, developing innovative solutions and creating opportunities for the future.
-        </p>
-      </div>
-    </section>
-
-    <!-- Contact / Footer -->
-    <footer class="footer" id="contact">
-      <div class="container">
-        <div class="footer-top">
-          <div class="footer-brand">
-            <img src="logo.jpg" alt="ZAH INDUSTRIES" class="footer-logo" />
-            <p class="footer-tagline">Building the future.</p>
-          </div>
-          <nav class="footer-nav">
-            <a href="#hero">Home</a>
-            <a href="#about">About Us</a>
-            <a href="#companies">Our Companies</a>
-            <a href="#vision">Our Vision</a>
-            <a href="#contact">Contact</a>
-          </nav>
-          <div class="footer-contact">
-            <p class="footer-label">Get in touch</p>
-            <a href="mailto:contact@zahindustries.com" class="footer-email">contact@zahindustries.com</a>
-            <div class="footer-social">
-              <a href="#" aria-label="LinkedIn" class="social-link">LinkedIn</a>
-              <a href="#" aria-label="X" class="social-link">X</a>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>Copyright © 2026 ZAH INDUSTRIES. All Rights Reserved.</p>
-        </div>
-      </div>
-    </footer>
-  </main>
-
-  <script src="script.js"></script>
 </body>
 </html>

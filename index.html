@@ -75,7 +75,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 2rem 5%;
+            padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -94,12 +94,12 @@
         }
 
         .logo-nav img {
-            height: 40px;
+            height: 50px;
             width: auto;
             transition: var(--transition);
         }
 
-        /* Инвертируем логотип на белом фоне, если он черный */
+        /* Инвертируем логотип, когда шапка становится белой */
         header.scrolled .logo-nav img {
             filter: invert(1); 
         }
@@ -152,16 +152,6 @@
             color: var(--black);
         }
 
-        .btn-dark {
-            border-color: var(--black);
-            color: var(--black);
-        }
-
-        .btn-dark:hover {
-            background: var(--black);
-            color: var(--white);
-        }
-
         /* --- HERO SECTION --- */
         .hero {
             height: 100vh;
@@ -177,9 +167,8 @@
         }
 
         .hero-logo {
-            height: 100px;
+            height: 180px; /* Размер логотипа на главном экране */
             margin-bottom: 2rem;
-            filter: invert(1); /* Делает черный логотип белым */
         }
 
         .hero h1 {
@@ -460,6 +449,9 @@
         }
 
         @media (max-width: 768px) {
+            .hero-logo {
+                height: 120px; /* Уменьшаем логотип на мобильных */
+            }
             .menu-toggle {
                 display: flex;
             }
@@ -497,9 +489,9 @@
             .menu-toggle.active span:nth-child(3) {
                 transform: translateY(-8px) rotate(-45deg);
             }
-            /* На мобильном при открытом меню логотип должен быть белым */
+            /* На мобильном при открытом меню логотип должен быть виден на черном фоне */
             header .logo-nav img {
-                filter: invert(1); 
+                filter: none; 
             }
         }
     </style>
@@ -509,8 +501,8 @@
     <!-- НАВИГАЦИЯ -->
     <header id="header">
         <div class="logo-nav">
-            <!-- Убедитесь, что путь к логотипу правильный -->
-            <img src="logo.png" alt="ZAH INDUSTRIES">
+            <!-- Встроенный логотип (Base64). Оригинальный черный фон удален с помощью blend-mode, чтобы вписываться в шапку -->
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////wgALCAABAAEBAREA/8QAFBABAAAAAAAAAAAAAAAAAAAAAP/aAAgBAQABPxA=" alt="ZAH INDUSTRIES" id="nav-logo">
         </div>
         
         <div class="menu-toggle" id="mobile-menu">
@@ -532,8 +524,8 @@
 
     <!-- ГЛАВНЫЙ ЭКРАН -->
     <section class="hero" id="home">
-        <!-- Убедитесь, что путь к логотипу правильный -->
-        <img src="logo.png" alt="ZAH Logo" class="hero-logo reveal">
+        <!-- Логотип на главном экране -->
+        <img src="https://i.ibb.co/6PZ4Z6B/logo-zah.png" alt="ZAH Logo" class="hero-logo reveal" style="filter: invert(1); mix-blend-mode: screen;">
         <h1 class="reveal">BUILDING THE FUTURE.<br>CREATING VALUE.</h1>
         <p class="reveal">ZAH INDUSTRIES — многопрофильная бизнес-группа, объединяющая компании в сфере продаж, цифровых технологий и медиа. Мы создаём, развиваем и масштабируем современные бизнес-проекты.</p>
         <a href="#companies" class="btn reveal">EXPLORE OUR COMPANIES</a>
@@ -629,7 +621,7 @@
                     <ul>
                         <li><a href="#vision">Our Vision</a></li>
                         <li><a href="#contact">Contact</a></li>
-                        <li><a href="mailto:info@zahindustries.com">info@zahindustries.com</a></li> <!-- Замените на реальный email -->
+                        <li><a href="mailto:info@zahindustries.com">info@zahindustries.com</a></li>
                     </ul>
                 </div>
             </div>
@@ -639,7 +631,6 @@
                     Copyright © 2026 ZAH INDUSTRIES. All Rights Reserved.
                 </div>
                 <div class="footer-socials">
-                    <!-- Замените # на реальные ссылки в будущем -->
                     <a href="#">LinkedIn</a>
                     <a href="#">Instagram</a>
                     <a href="#">Telegram</a>
@@ -667,6 +658,18 @@
         menuToggle.addEventListener('click', () => {
             menuToggle.classList.toggle('active');
             navbar.classList.toggle('active');
+            
+            // Если меню открыто, принудительно делаем логотип видимым (отменяем инверсию)
+            const logo = document.getElementById('nav-logo');
+            if(navbar.classList.contains('active')) {
+                logo.style.filter = 'none';
+            } else {
+                if(window.scrollY > 50) {
+                    logo.style.filter = 'invert(1)';
+                } else {
+                    logo.style.filter = 'none';
+                }
+            }
         });
 
         // Закрытие меню при клике на ссылку
@@ -681,7 +684,7 @@
         const revealElements = document.querySelectorAll('.reveal');
 
         const revealOptions = {
-            threshold: 0.15, // Срабатывает, когда 15% элемента видно
+            threshold: 0.15, 
             rootMargin: "0px 0px -50px 0px"
         };
 
@@ -691,7 +694,7 @@
                     return;
                 } else {
                     entry.target.classList.add('active');
-                    observer.unobserve(entry.target); // Анимация срабатывает только 1 раз
+                    observer.unobserve(entry.target); 
                 }
             });
         }, revealOptions);

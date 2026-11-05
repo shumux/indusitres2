@@ -1,211 +1,704 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZAH INDUSTRIES — Building the Future</title>
-  <meta name="description" content="ZAH INDUSTRIES is a multi-profile business group uniting companies in sales, digital technologies and media. We create, develop and scale modern business projects." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAH INDUSTRIES | Building the Future</title>
+    
+    <!-- Подключение шрифтов (Manrope) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- БАЗОВЫЕ СТИЛИ И ПЕРЕМЕННЫЕ --- */
+        :root {
+            --black: #080808;
+            --white: #FFFFFF;
+            --light-grey: #F4F4F4;
+            --graphite: #242424;
+            --text-grey: #666666;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --font-main: 'Manrope', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        /* --- АНИМАЦИИ ПРИ СКРОЛЛЕ --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: var(--transition);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- НАВИГАЦИЯ --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition);
+            background: transparent;
+            color: var(--white);
+        }
+
+        header.scrolled {
+            padding: 1rem 5%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: var(--black);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo-nav img {
+            height: 40px;
+            width: auto;
+            transition: var(--transition);
+        }
+
+        /* Инвертируем логотип на белом фоне, если он черный */
+        header.scrolled .logo-nav img {
+            filter: invert(1); 
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: currentColor;
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* --- КНОПКИ --- */
+        .btn {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            border: 1px solid var(--white);
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .btn:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .btn-dark {
+            border-color: var(--black);
+            color: var(--black);
+        }
+
+        .btn-dark:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background-color: var(--black);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+        }
+
+        .hero-logo {
+            height: 100px;
+            margin-bottom: 2rem;
+            filter: invert(1); /* Делает черный логотип белым */
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            max-width: 700px;
+            color: #a0a0a0;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about {
+            padding: 10rem 0;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .about h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            color: var(--text-grey);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        /* --- COMPANIES SECTION --- */
+        .companies {
+            padding: 10rem 0;
+            background-color: var(--light-grey);
+        }
+
+        .companies-header {
+            margin-bottom: 5rem;
+            text-align: center;
+        }
+
+        .companies-header h2 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .companies-header p {
+            color: var(--text-grey);
+            font-size: 1.2rem;
+        }
+
+        .company-blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .company-block {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.05);
+            padding: 4rem;
+            border-radius: 4px;
+            transition: var(--transition);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .company-block:hover {
+            transform: scale(1.02);
+            background: var(--graphite);
+            color: var(--white);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+
+        .company-block h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .company-block .key-idea {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-grey);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .company-block:hover .key-idea {
+            color: #a0a0a0;
+        }
+
+        .company-desc {
+            color: var(--text-grey);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+
+        .company-block:hover .company-desc {
+            color: #e0e0e0;
+        }
+
+        .company-block .btn {
+            border-color: var(--black);
+            color: var(--black);
+        }
+
+        .company-block:hover .btn {
+            border-color: var(--white);
+            color: var(--white);
+        }
+
+        .company-block:hover .btn:hover {
+            background: var(--white);
+            color: var(--graphite);
+        }
+
+        /* --- VISION SECTION --- */
+        .vision {
+            padding: 12rem 0;
+            background-color: var(--black);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .vision h2 {
+            font-size: clamp(3rem, 6vw, 6rem);
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -2px;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+        }
+
+        .vision p {
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            max-width: 900px;
+            margin: 0 auto;
+            color: #a0a0a0;
+            font-weight: 300;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 5rem 0 2rem;
+            border-top: 1px solid #242424;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 5rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-brand p {
+            color: #a0a0a0;
+            font-size: 1rem;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 4rem;
+        }
+
+        .footer-nav ul {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-nav a {
+            color: #a0a0a0;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .footer-nav a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid #242424;
+            color: #666;
+            font-size: 0.85rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        /* --- МОБИЛЬНОЕ МЕНЮ --- */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 30px;
+            height: 2px;
+            background: currentColor;
+            transition: var(--transition);
+        }
+
+        /* --- АДАПТИВНОСТЬ --- */
+        @media (max-width: 992px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .company-block {
+                grid-template-columns: 1fr;
+                padding: 3rem;
+            }
+            .footer-top {
+                flex-direction: column;
+                gap: 3rem;
+            }
+            .footer-nav {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: var(--black);
+                color: var(--white);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: var(--transition);
+                z-index: 1000;
+            }
+            nav.active {
+                right: 0;
+            }
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+                gap: 3rem;
+            }
+            nav a {
+                font-size: 1.5rem;
+            }
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            /* На мобильном при открытом меню логотип должен быть белым */
+            header .logo-nav img {
+                filter: invert(1); 
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <header class="header" id="header">
-    <div class="container header-inner">
-      <a href="#hero" class="logo-link" aria-label="ZAH INDUSTRIES Home">
-        <img src="logo.jpg" alt="ZAH INDUSTRIES" class="logo-img" />
-      </a>
-      <nav class="nav" id="nav">
-        <ul class="nav-list">
-          <li><a href="#hero" class="nav-link">Home</a></li>
-          <li><a href="#about" class="nav-link">About Us</a></li>
-          <li><a href="#companies" class="nav-link">Our Companies</a></li>
-          <li><a href="#vision" class="nav-link">Our Vision</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
-      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </header>
 
-  <!-- Mobile menu overlay -->
-  <div class="mobile-menu" id="mobile-menu">
-    <ul class="mobile-nav-list">
-      <li><a href="#hero" class="mobile-nav-link">Home</a></li>
-      <li><a href="#about" class="mobile-nav-link">About Us</a></li>
-      <li><a href="#companies" class="mobile-nav-link">Our Companies</a></li>
-      <li><a href="#vision" class="mobile-nav-link">Our Vision</a></li>
-      <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
-    </ul>
-  </div>
-
-  <main>
-    <!-- Hero -->
-    <section class="hero" id="hero">
-      <div class="container hero-content">
-        <div class="hero-logo reveal">
-          <img src="logo.jpg" alt="ZAH INDUSTRIES logo" class="hero-logo-img" />
+    <!-- НАВИГАЦИЯ -->
+    <header id="header">
+        <div class="logo-nav">
+            <!-- Убедитесь, что путь к логотипу правильный -->
+            <img src="logo.png" alt="ZAH INDUSTRIES">
         </div>
-        <p class="hero-label reveal delay-1">ZAH INDUSTRIES</p>
-        <h1 class="hero-title reveal delay-2">
-          BUILDING THE FUTURE.<br />CREATING VALUE.
-        </h1>
-        <p class="hero-desc reveal delay-3">
-          ZAH INDUSTRIES — a multi-profile business group uniting companies in sales, digital technologies and media. We create, develop and scale modern business projects.
-        </p>
-        <a href="#companies" class="btn btn-primary reveal delay-4">EXPLORE OUR COMPANIES</a>
-      </div>
-      <div class="hero-scroll">
-        <span>Scroll</span>
-        <div class="scroll-line"></div>
-      </div>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav id="navbar">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#companies">Our Companies</a></li>
+                <li><a href="#vision">Our Vision</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="hero" id="home">
+        <!-- Убедитесь, что путь к логотипу правильный -->
+        <img src="logo.png" alt="ZAH Logo" class="hero-logo reveal">
+        <h1 class="reveal">BUILDING THE FUTURE.<br>CREATING VALUE.</h1>
+        <p class="reveal">ZAH INDUSTRIES — многопрофильная бизнес-группа, объединяющая компании в сфере продаж, цифровых технологий и медиа. Мы создаём, развиваем и масштабируем современные бизнес-проекты.</p>
+        <a href="#companies" class="btn reveal">EXPLORE OUR COMPANIES</a>
     </section>
 
-    <!-- About -->
-    <section class="about section" id="about">
-      <div class="container">
-        <p class="section-label reveal">About</p>
-        <h2 class="section-title reveal">WHO WE ARE</h2>
-        <div class="about-grid">
-          <div class="about-text reveal">
-            <p>
-              ZAH INDUSTRIES is an ecosystem of independent business directions united by a common strategy, an innovative approach and a drive for growth.
-            </p>
-            <p>
-              Our goal is to create effective business solutions, develop promising directions and build long-term value.
-            </p>
-          </div>
-          <div class="about-stats reveal">
-            <div class="stat">
-              <span class="stat-number">3</span>
-              <span class="stat-label">Core Directions</span>
+    <!-- О КОМПАНИИ -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="reveal">
+                    <span class="section-title">About Us</span>
+                    <h2>WHO WE ARE</h2>
+                </div>
+                <div class="reveal">
+                    <p>ZAH INDUSTRIES — это экосистема самостоятельных направлений бизнеса, объединённых общей стратегией, инновационным подходом и стремлением к развитию.</p>
+                    <p>Наша цель — создавать эффективные бизнес-решения, развивать перспективные направления и формировать долгосрочную ценность.</p>
+                </div>
             </div>
-            <div class="stat">
-              <span class="stat-number">1</span>
-              <span class="stat-label">Unified Vision</span>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
-    <!-- Companies -->
-    <section class="companies section" id="companies">
-      <div class="container">
-        <p class="section-label reveal">Portfolio</p>
-        <h2 class="section-title reveal">OUR COMPANIES</h2>
-        <p class="section-subtitle reveal">Three directions. One vision.</p>
-
-        <div class="companies-grid">
-          <!-- ZAH SALES -->
-          <article class="company-card reveal" data-company="sales">
-            <div class="company-card-inner">
-              <div class="company-header">
-                <h3 class="company-name">ZAH SALES</h3>
-                <span class="company-tag">SALES &amp; BUSINESS DEVELOPMENT</span>
-              </div>
-              <p class="company-desc">
-                ZahSales specializes in sales, commercial projects, client relationship development and the creation of effective business models.
-              </p>
-              <div class="company-extra">
-                <p>
-                  We build scalable commercial systems, optimize go-to-market strategies and unlock growth opportunities across markets.
-                </p>
-                <a href="#" class="btn btn-outline company-btn" data-link="sales">EXPLORE</a>
-              </div>
+    <!-- НАШИ КОМПАНИИ -->
+    <section class="companies" id="companies">
+        <div class="container">
+            <div class="companies-header reveal">
+                <h2>OUR COMPANIES</h2>
+                <p>Three directions. One vision.</p>
             </div>
-          </article>
 
-          <!-- ZAH DIGITAL -->
-          <article class="company-card reveal" data-company="digital">
-            <div class="company-card-inner">
-              <div class="company-header">
-                <h3 class="company-name">ZAH DIGITAL</h3>
-                <span class="company-tag">TECHNOLOGY &amp; INNOVATION</span>
-              </div>
-              <p class="company-desc">
-                ZahDigital delivers digital solutions, develops modern products, automates processes and advances technology projects.
-              </p>
-              <div class="company-extra">
-                <p>
-                  From product engineering to process automation — we turn ideas into reliable, scalable digital systems.
-                </p>
-                <a href="#" class="btn btn-outline company-btn" data-link="digital">EXPLORE</a>
-              </div>
-            </div>
-          </article>
+            <div class="company-blocks">
+                <!-- Блок 1 -->
+                <div class="company-block reveal">
+                    <div>
+                        <span class="key-idea">SALES & BUSINESS DEVELOPMENT</span>
+                        <h3>ZAH SALES</h3>
+                        <p class="company-desc">ZahSales специализируется на продажах, коммерческих проектах, развитии клиентских отношений и создании эффективных бизнес-моделей.</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <a href="#" class="btn">EXPLORE</a>
+                    </div>
+                </div>
 
-          <!-- ZAH MEDIA -->
-          <article class="company-card reveal" data-company="media">
-            <div class="company-card-inner">
-              <div class="company-header">
-                <h3 class="company-name">ZAH MEDIA</h3>
-                <span class="company-tag">MEDIA &amp; COMMUNICATIONS</span>
-              </div>
-              <p class="company-desc">
-                ZahMedia unites content creation, media production, visual communications and the development of brands’ digital presence.
-              </p>
-              <div class="company-extra">
-                <p>
-                  We craft narratives, visual systems and media strategies that strengthen brand perception and audience connection.
-                </p>
-                <a href="#" class="btn btn-outline company-btn" data-link="media">EXPLORE</a>
-              </div>
+                <!-- Блок 2 -->
+                <div class="company-block reveal">
+                    <div>
+                        <span class="key-idea">TECHNOLOGY & INNOVATION</span>
+                        <h3>ZAH DIGITAL</h3>
+                        <p class="company-desc">ZahDigital занимается цифровыми решениями, разработкой современных продуктов, автоматизацией процессов и развитием технологических проектов.</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <a href="#" class="btn">EXPLORE</a>
+                    </div>
+                </div>
+
+                <!-- Блок 3 -->
+                <div class="company-block reveal">
+                    <div>
+                        <span class="key-idea">MEDIA & COMMUNICATIONS</span>
+                        <h3>ZAH MEDIA</h3>
+                        <p class="company-desc">ZahMedia объединяет создание контента, медиапроизводство, визуальные коммуникации и развитие цифрового присутствия брендов.</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <a href="#" class="btn">EXPLORE</a>
+                    </div>
+                </div>
             </div>
-          </article>
         </div>
-      </div>
     </section>
 
-    <!-- Vision -->
-    <section class="vision section" id="vision">
-      <div class="container vision-content">
-        <h2 class="vision-title reveal">
-          ONE VISION.<br />MULTIPLE DIRECTIONS.
-        </h2>
-        <p class="vision-text reveal">
-          We believe in building strong businesses, developing innovative solutions and creating opportunities for the future.
-        </p>
-      </div>
+    <!-- НАШЕ ВИДЕНИЕ -->
+    <section class="vision" id="vision">
+        <div class="container">
+            <h2 class="reveal">ONE VISION.<br>MULTIPLE DIRECTIONS.</h2>
+            <p class="reveal">We believe in building strong businesses, developing innovative solutions and creating opportunities for the future.</p>
+        </div>
     </section>
 
-    <!-- Contact / Footer -->
-    <footer class="footer" id="contact">
-      <div class="container">
-        <div class="footer-top">
-          <div class="footer-brand">
-            <img src="logo.jpg" alt="ZAH INDUSTRIES" class="footer-logo" />
-            <p class="footer-tagline">Building the future.</p>
-          </div>
-          <nav class="footer-nav">
-            <a href="#hero">Home</a>
-            <a href="#about">About Us</a>
-            <a href="#companies">Our Companies</a>
-            <a href="#vision">Our Vision</a>
-            <a href="#contact">Contact</a>
-          </nav>
-          <div class="footer-contact">
-            <p class="footer-label">Get in touch</p>
-            <a href="mailto:contact@zahindustries.com" class="footer-email">contact@zahindustries.com</a>
-            <div class="footer-social">
-              <a href="#" aria-label="LinkedIn" class="social-link">LinkedIn</a>
-              <a href="#" aria-label="X" class="social-link">X</a>
+    <!-- ПОДВАЛ -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand reveal">
+                    <h3>ZAH INDUSTRIES</h3>
+                    <p>Building the future.</p>
+                </div>
+                
+                <div class="footer-nav reveal">
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#companies">Our Companies</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#vision">Our Vision</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="mailto:info@zahindustries.com">info@zahindustries.com</a></li> <!-- Замените на реальный email -->
+                    </ul>
+                </div>
             </div>
-          </div>
+
+            <div class="footer-bottom">
+                <div class="copyright">
+                    Copyright © 2026 ZAH INDUSTRIES. All Rights Reserved.
+                </div>
+                <div class="footer-socials">
+                    <!-- Замените # на реальные ссылки в будущем -->
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Telegram</a>
+                </div>
+            </div>
         </div>
-        <div class="footer-bottom">
-          <p>Copyright © 2026 ZAH INDUSTRIES. All Rights Reserved.</p>
-        </div>
-      </div>
     </footer>
-  </main>
 
-  <script src="script.js"></script>
+    <!-- JAVASCRIPT -->
+    <script>
+        // 1. Изменение навигации при скролле
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Мобильное меню
+        const menuToggle = document.getElementById('mobile-menu');
+        const navbar = document.getElementById('navbar');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navbar.classList.toggle('active');
+        });
+
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navbar.classList.remove('active');
+            });
+        });
+
+        // 3. Анимации появления при скролле (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOptions = {
+            threshold: 0.15, // Срабатывает, когда 15% элемента видно
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Анимация срабатывает только 1 раз
+                }
+            });
+        }, revealOptions);
+
+        revealElements.forEach(el => {
+            revealOnScroll.observe(el);
+        });
+    </script>
 </body>
 </html>
